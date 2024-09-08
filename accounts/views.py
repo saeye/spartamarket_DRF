@@ -9,6 +9,8 @@ from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
+from rest_framework_simplejwt.exceptions import TokenError
+
 
 class SignupView(APIView):
     def post(self, request):
@@ -42,7 +44,7 @@ class SigninView(APIView):
 
 
 class SignoutView(APIView):
-    def post(self, request):
+    def delete(self, request):
         refresh_token = request.data.get("refresh_token")
 
         if not refresh_token:
@@ -51,7 +53,7 @@ class SignoutView(APIView):
         try:
             token = RefreshToken(refresh_token)
             token.blacklist()
-        except InvalidToken:
+        except (InvalidToken, TokenError):
             return Response({"error": "유효하지 않은 토큰입니다."}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({"message": "로그아웃되었습니다."}, status=status.HTTP_205_RESET_CONTENT)
