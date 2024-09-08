@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserProfileSerializer
 from .models import CustomUser
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import InvalidToken
@@ -65,7 +65,7 @@ class ProfileView(APIView):
     def get(self, request, username):
         if request.user.is_authenticated:
             user = get_object_or_404(CustomUser, username=username)
-            serializer = UserSerializer(user)
+            serializer = UserProfileSerializer(user)
             return Response(serializer.data, status=200)
         else:
             return Response({"error": "로그인 후 조회할 수 있습니다."}, status=status.HTTP_401_UNAUTHORIZED)
