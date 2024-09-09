@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer, UserProfileSerializer
 from .models import CustomUser
 
-
+# 회원가입
 class SignupView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -16,7 +16,7 @@ class SignupView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+# 로그인
 class SigninView(APIView):
     def post(self, request):
         username = request.data.get("username")
@@ -34,7 +34,7 @@ class SigninView(APIView):
             "refresh_token": str(refresh)
         }, status=status.HTTP_200_OK)
 
-
+# 로그아웃
 class SignoutView(APIView):
     def delete(self, request):
         refresh_token = request.data.get("refresh_token")
@@ -49,6 +49,7 @@ class SignoutView(APIView):
             return Response({"error": "유효하지 않은 토큰입니다."}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# 프로필 조회
 class ProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated] 
 
