@@ -65,4 +65,3 @@
     * 조건: 로그인 상태
     * 구현: Product 모델에 likes 필드 추가 후 ManyToMany 관계 설정
  
-  

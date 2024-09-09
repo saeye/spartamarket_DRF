@@ -11,7 +11,7 @@ from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.exceptions import TokenError
 
-
+# 회원가입
 class SignupView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -20,7 +20,7 @@ class SignupView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+# 로그인
 class SigninView(APIView):
     def post(self, request):
         username = request.data.get("username")
@@ -42,7 +42,7 @@ class SigninView(APIView):
 
         return Response(res_data, status=status.HTTP_200_OK)
 
-
+# 로그아웃
 class SignoutView(APIView):
     def delete(self, request):
         refresh_token = request.data.get("refresh_token")
@@ -58,7 +58,7 @@ class SignoutView(APIView):
 
         return Response({"message": "로그아웃되었습니다."}, status=status.HTTP_205_RESET_CONTENT)
     
-
+# 프로필 조회
 class ProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated] 
 
