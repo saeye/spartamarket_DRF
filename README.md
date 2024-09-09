@@ -46,21 +46,21 @@
     * 구현: 모든 상품 목록 페이지네이션으로 반환
 
 * 상품 수정
-    * Endpoint: /api/products/<int:productId>/
+    * Endpoint: /api/products/<int:pk>/
     * Method: PUT
     * 조건: 로그인 상태, 수정 권한 있는 사용자(게시글 작성자)만 가능
     * 검증: 요청자가 게시글의 작성자와 일치하는지 확인
     * 구현: 입력된 정보로 기존 상품 정보를 업데이트
 
 * 상품 삭제
-    * Endpoint: /api/products/<int:productId>/delete/
+    * Endpoint: /api/products/<int:pk>/delete/
     * Method: DELETE
     * 조건: 로그인 상태, 삭제 권한 있는 사용자(게시글 작성자)만 가능
     * 검증: 요청자가 게시글의 작성자와 일치하는지 확인
     * 구현: 해당 상품을 데이터베이스에서 삭제
 
 * 상품 좋아요
-    * Endpoint: /api/products/<int:productId>/like/
+    * Endpoint: /api/products/<int:pk>/like/
     * Method: POST
     * 조건: 로그인 상태
     * 구현: Product 모델에 likes 필드 추가 후 ManyToMany 관계 설정
