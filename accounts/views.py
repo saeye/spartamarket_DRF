@@ -34,6 +34,7 @@ class SigninView(APIView):
             "refresh_token": str(refresh)
         }, status=status.HTTP_200_OK)
 
+
 # 로그아웃
 class SignoutView(APIView):
     def delete(self, request):

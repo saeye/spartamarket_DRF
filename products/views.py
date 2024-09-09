@@ -1,4 +1,3 @@
-# products/views.py
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -6,6 +5,8 @@ from .models import Product
 from .serializers import ProductSerializer
 from .pagination import CustomPagination
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductCreateView(APIView):
@@ -51,3 +52,21 @@ class ProductDeleteView(APIView):
 
         product.delete()
         return Response({"message": "상품이 삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT)
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def like_product(request, pk):
+    try:
+        product = Product.objects.get(id=pk)
+    except Product.DoesNotExist:
+        return Response({"error": "상품이 존재하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
+
+    user = request.user
+
+    if product.likes.filter(id=user.id).exists():
+        product.likes.remove(user)
+        return Response({"좋아요 취소"}, status=status.HTTP_200_OK)
+    else:
+        product.likes.add(user)
+        return Response({"좋아요"}, status=status.HTTP_200_OK)
