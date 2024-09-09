@@ -56,7 +56,7 @@ class ProductDeleteView(APIView):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def product_like(request, pk):
+def like_product(request, pk):
     try:
         product = Product.objects.get(id=pk)
     except Product.DoesNotExist:
