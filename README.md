@@ -1,6 +1,6 @@
 ![ERD](https://github.com/user-attachments/assets/f770eb89-eb21-4e23-93ed-cd71fcf28497)
 
-
+<br>
 회원 관련 기능 및 조건
 
 * 회원가입
@@ -30,8 +30,7 @@
     * 검증: 로그인 한 사용자만 프로필 조회 가능 (access token)
     * 구현: 로그인한 사용자의 정보를 JSON 형태로 반환 (username, nickname, email, birth, introduction)
 
-
-
+<br>
 상품 관련 기능 및 조건
 
 * 상품 등록
