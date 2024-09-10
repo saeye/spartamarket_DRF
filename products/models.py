@@ -12,6 +12,3 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='like_product')
 
-    def __str__(self):
-        return self.title
-

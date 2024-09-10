@@ -1,11 +1,7 @@
 from rest_framework import serializers
 from .models import CustomUser
-from .validators import validate_username, validate_nickname, validate_email_unique
 
 class UserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(validators=[validate_username])
-    nickname = serializers.CharField(validators=[validate_nickname])
-    email = serializers.EmailField(validators=[validate_email_unique])
 
     class Meta:
         model = CustomUser

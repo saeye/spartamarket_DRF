@@ -6,6 +6,7 @@ from rest_framework import status, permissions
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer, UserProfileSerializer
 from .models import CustomUser
+from rest_framework.permissions import IsAuthenticated
 
 # 회원가입
 class SignupView(APIView):
@@ -52,7 +53,7 @@ class SignoutView(APIView):
 
 # 프로필 조회
 class ProfileView(APIView):
-    permission_classes = [permissions.IsAuthenticated] 
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, username):
         user = get_object_or_404(CustomUser, username=username)
