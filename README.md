@@ -65,3 +65,7 @@
     * 조건: 로그인 상태
     * 구현: Product 모델에 likes 필드 추가 후 ManyToMany 관계 설정
  
+
+API 문서: https://documenter.getpostman.com/view/38042562/2sAXjSyoYf
+
+트러블 슈팅: https://monsterroute.tistory.com/72 

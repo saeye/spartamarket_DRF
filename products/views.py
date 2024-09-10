@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ProductCreateView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
@@ -29,7 +29,7 @@ class ProductListView(generics.ListAPIView):
 class ProductUpdateView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         product = super().get_object()
@@ -39,7 +39,7 @@ class ProductUpdateView(generics.UpdateAPIView):
 
 
 class ProductDeleteView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
         try:
