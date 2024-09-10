@@ -5,3 +5,4 @@ def validate_required_field(value, field_name):
     if not value:
         raise serializers.ValidationError(f"{field_name}을(를) 입력해주세요.")
     return value
+
