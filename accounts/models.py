@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
         ('female', '여'),
     )
 
-    name = models.CharField(max_length=30, default='default_name', null=False, blank=False)
+    name = models.CharField(max_length=30)
     nickname = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True)
     birth = models.DateField(null=False, blank=False)  
