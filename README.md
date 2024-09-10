@@ -68,4 +68,4 @@
 
 API 문서: https://documenter.getpostman.com/view/38042562/2sAXjSyoYf
 
-트러블 슈팅: 
+트러블 슈팅: https://monsterroute.tistory.com/72 

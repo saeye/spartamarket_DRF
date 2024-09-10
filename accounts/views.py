@@ -38,17 +38,19 @@ class SigninView(APIView):
 
 # 로그아웃
 class SignoutView(APIView):
-    def delete(self, request):
-        refresh_token = request.data.get("refresh_token")
+    permission_classes = [IsAuthenticated]
 
-        if not refresh_token:
-            return Response({"error": "토큰이 제공되지 않았습니다."}, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request):
+        refresh_token_str = request.data.get("refresh_token")
+        refresh_token = RefreshToken(refresh_token)
 
         try:
-            RefreshToken(refresh_token).blacklist()
-            return Response({"message": "로그아웃되었습니다."}, status=status.HTTP_205_RESET_CONTENT)
+            refresh_token.check_blacklist()
         except Exception:
             return Response({"error": "유효하지 않은 토큰입니다."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        refresh_token.blacklist()
+        return Response({"message": "로그아웃되었습니다."}, status=status.HTTP_200_OK)
 
 
 # 프로필 조회
